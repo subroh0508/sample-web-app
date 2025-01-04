@@ -7,5 +7,11 @@
 <body>
   <h1>Home</h1>
   <p>Welcome to the home page developed by Go lang</p>
+
+  <h2>All Blog Posts</h2>
+  {{ range $blog := .blogs }}
+    <h3>{{ $blog.Title }}</h3>
+    <p>{{ $blog.Content }}</p>
+  {{ end }}
 </body>
 </html>

@@ -6,7 +6,7 @@ import (
 	"sample-web-app/model"
 )
 
-type BlogController interface {
+type PostController interface {
 	Index(c *gin.Context)
 	// Create(c *gin.Context)
 	// Show(id uint, c *gin.Context)
@@ -14,18 +14,18 @@ type BlogController interface {
 	// Delete(id uint, c *gin.Context)
 }
 
-type blogController struct {
+type postController struct {
 	db *gorm.DB
 }
 
-func NewBlogController(db *gorm.DB) BlogController {
-	return &blogController{db}
+func NewPostController(db *gorm.DB) PostController {
+	return &postController{db}
 }
 
-func (controller *blogController) Index(c *gin.Context) {
-	var blogs []model.Blog
-	controller.db.Find(&blogs)
+func (controller *postController) Index(c *gin.Context) {
+	var posts []model.Post
+	controller.db.Find(&posts)
 	c.HTML(200, "index.html", gin.H{
-		"blogs": blogs,
+		"blogs": model.MapPostToJson(posts),
 	})
 }

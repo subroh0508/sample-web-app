@@ -9,9 +9,15 @@
   <p>Welcome to the home page developed by Go lang</p>
 
   <h2>All Blog Posts</h2>
+  <a href="/posts/new">Create Post</a>
+  <hr>
   {{ range $blog := .blogs }}
-    <h3>{{ $blog.Title }}</h3>
-    <p>{{ $blog.Content }}</p>
+    <h3>{{ $blog.title }}</h3>
+    <p>{{ $blog.content }}</p>
+    <a href="{{ $blog.show_href }}">Open</a>
+    <a href="{{ $blog.edit_href }}">Edit</a>
+    <a href="{{ $blog.delete_href }}" data-method="delete">Delete</a>
+    <hr>
   {{ end }}
 </body>
 </html>

@@ -15,20 +15,20 @@ func main() {
 		panic("failed to connect database")
 	}
 
-	db.AutoMigrate(&model.Blog{})
+	db.AutoMigrate(&model.Post{})
 
-	var blog model.Blog
-	db.First(&blog, 1)
-	if blog.ID == 0 {
-		db.Create(&model.Blog{Title: "First Post", Content: "Hello, World!"})
+	var post model.Post
+	db.First(&post, 1)
+	if post.ID == 0 {
+		db.Create(&model.Post{Title: "First Post", Content: "Hello, World!"})
 	}
 
-	blogController := controller.NewBlogController(db)
+	postController := controller.NewPostController(db)
 
 	r := gin.Default()
 
 	r.LoadHTMLGlob("views/*")
-	r.GET("/", blogController.Index)
+	r.GET("/", postController.Index)
 
 	r.Run(":8080")
 }

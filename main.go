@@ -6,10 +6,13 @@ import (
 
 func main() {
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run()
+
+	r.LoadHTMLGlob("views/*")
+	r.GET("/", indexHandler)
+
+	r.Run(":8080")
+}
+
+func indexHandler(c *gin.Context) {
+	c.HTML(200, "index.html", nil)
 }

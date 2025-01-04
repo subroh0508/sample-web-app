@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+</head>
+<body>
+  <h1>Home</h1>
+  <p>Welcome to the home page developed by Go lang</p>
+
+  <h2>All Blog Posts</h2>
+  <a href="/posts/new">Create Post</a>
+  <hr>
+  {{ range $post := .posts }}
+    <h3>{{ $post.title }}</h3>
+    <p>{{ $post.content }}</p>
+    <div style="display: flex; gap: 4px">
+      <form action="{{ $post.get_show_href }}" method="get">
+        <button type="submit">Open</button>
+      </form>
+      <form action="{{ $post.get_edit_href }}" method="get">
+        <button type="submit">Edit</button>
+      </form>
+      <form action="{{ $post.delete_href }}" method="post">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+    <hr>
+  {{ end }}
+</body>
+</html>

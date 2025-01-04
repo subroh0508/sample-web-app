@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ .post.title }}</title>
+</head>
+<body>
+  <h1>{{ .post.title }}</h1>
+  <p>{{ .post.content }}</p>
+  <div style="display: flex; gap: 4px">
+    <form action="/" method="get">
+      <button type="submit">Back</button>
+    </form>
+    <form action="{{ .post.get_edit_href }}" method="get">
+      <button type="submit">Edit</button>
+    </form>
+    <form action="{{ .post.delete_href }}" method="post">
+      <button type="submit">Delete</button>
+    </form>
+  </div>
+</body>
+</html>

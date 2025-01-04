@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Post</title>
+</head>
+<body>
+  <form action="{{ .post.post_edit_href }}" method="post">
+    <div>
+      <p>
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" value="{{ .post.title }}">
+      </p>
+      <p>
+        <label for="content">Content</label>
+        <textarea id="content" name="content">{{ .post.content }}</textarea>
+      </p>
+
+      <button type="submit">Save</button>
+    </div>
+  </form>
+  <form action="/" method="get">
+    <button type="submit">Back</button>
+  </form>
+</body>
+</html>

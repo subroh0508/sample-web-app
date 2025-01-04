@@ -15,20 +15,26 @@ func main() {
 		panic("failed to connect database")
 	}
 
-	db.AutoMigrate(&model.Post{})
-
-	var post model.Post
-	db.First(&post, 1)
-	if post.ID == 0 {
-		db.Create(&model.Post{Title: "First Post", Content: "Hello, World!"})
+	err = db.AutoMigrate(&model.Post{})
+	if err != nil {
+		panic("failed to migrate database")
 	}
 
 	postController := controller.NewPostController(db)
 
 	r := gin.Default()
 
-	r.LoadHTMLGlob("views/*")
-	r.GET("/", postController.Index)
+	r.LoadHTMLGlob("resources/*")
+	r.GET("/", postController.GetIndex)
+	r.GET("/posts/new", postController.GetNew)
+	r.POST("/posts/new", postController.PostNew)
+	r.GET("/posts/:id", postController.GetShow)
+	r.GET("/posts/:id/edit", postController.GetEdit)
+	r.POST("/posts/:id", postController.PostEdit)
+	r.POST("/posts/:id/delete", postController.PostDelete)
 
-	r.Run(":8080")
+	err = r.Run(":8080")
+	if err != nil {
+		panic("failed to run server")
+	}
 }
